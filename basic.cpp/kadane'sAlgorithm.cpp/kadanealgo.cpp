@@ -1,7 +1,7 @@
 #include<iostream>
 using namespace std;
 int main(){
-    int arr[]={4,-5,6,-7,9};
+    int arr[]={4,-5,6,-2,9,-3,-8};
     int size = sizeof(arr)/sizeof(arr[0]);
     int currentsum = 0;
     int maxsum = INT16_MIN;
