@@ -22,7 +22,7 @@ class List {
         head = tail = NULL;
     }
 
-    void Push_front(int val) {
+    void Push_front(int val) { // O(1)
         Node* newNode = new Node(val);
         if (head == NULL)
         {
@@ -34,7 +34,7 @@ class List {
         }
     }
 
-    void Push_back(int val) {
+    void Push_back(int val) {  // O(1)
         Node* newNode = new Node(val);
         if (head == NULL)
         {
@@ -46,7 +46,7 @@ class List {
         
     }
 
-    void Pop_front() {
+    void Pop_front() {  // O(1)
         if (head == NULL)
         {
             cout << "Linked list is empty" << endl;
@@ -59,7 +59,7 @@ class List {
         delete temp;
     }
 
-    void Pop_back() {
+    void Pop_back() { // O(n)
         if (head == NULL)
         {
             cout << "Linked list is empty" << endl;
@@ -78,7 +78,63 @@ class List {
         tail = temp;
     }
 
-    void printLL() {
+    void insert_pos(int val, int pos) { // O(n)
+        if (pos < 0)
+        {
+            cout << "Invalid pos" << endl;
+            return;
+        }
+
+        if (pos == 0)
+        {
+            Push_front(val);
+            return;
+        }
+        
+        Node* temp = head;
+
+        for (int i = 0; i < pos-1; i++)
+        {
+            if (temp->next == NULL)
+            {
+                cout << "Invalid pos" << endl;
+                return;
+            }
+            
+            temp =temp->next;
+        }
+
+        Node* newNode = new Node(val);
+
+        newNode->next = temp->next;
+        temp->next = newNode;
+        
+    }
+
+    int search(int key) { // O(n)
+        if (head == NULL)
+        {
+            cout << "Linked list is empty" << endl;
+            return -1;
+        }
+
+        Node* temp = head;
+        int i = 0;
+        while(temp != NULL) {
+
+            if (temp->data == key)
+            {
+                return i;
+            }
+            temp = temp->next;
+            i++;
+        }
+
+        return -1;
+        
+    }
+
+    void printLL() { // O(n)
         Node* temp = head;
         if (head == NULL)
         {
@@ -99,13 +155,11 @@ class List {
 int main() {
 
     List ll;
-    ll.Push_front(1);
-    ll.Push_front(2);
     ll.Push_front(3);
-    ll.Push_back(4);
-    ll.printLL();
-    ll.Pop_front();
-    ll.Pop_back();
+    ll.Push_front(2);
+    ll.Push_front(1);
+    ll.insert_pos(4,3);
+    cout << ll.search(4) << endl;
     ll.printLL();
 
     return 0;
